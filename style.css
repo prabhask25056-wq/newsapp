@@ -1,0 +1,121 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-text-color: #1E90FF;
+    --secondary-color: #b698e7;
+    --accent-color: #4ad0f9;
+    --hover-color: #1c86ee;
+    --padding-inline: 20px;
+}
+
+.nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px var(--padding-inline);
+    background-color: #f8f8f8;
+}
+.logo{
+    height: 80px;
+    width: 280px;
+}
+.nav-links{
+    display: flex;
+    gap: 60px;
+    font-size: 28px;
+    color: var(--primary-text-color);
+    flex-direction: row;
+    margin: 20px 0;
+    cursor: pointer;
+    list-style: none;
+
+}
+.search-container{
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    
+}
+.search-input{
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+}
+.search-button{
+    padding: 8px 16px;
+    font-size: 16px;
+    background-color: var(--primary-text-color);
+    color: white;
+    border: none;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+.na{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px var(--padding-inline);
+    background-color: #f8f8f8;
+    color: #25a0f3;
+    text-decoration: none;
+}
+main{
+    padding: 20px var(--padding-inline);
+    margin-top: 80px;
+}
+.news-container{
+    display: flex;
+    flex-direction: row;
+    row-gap: 20px;
+    flex-wrap: wrap;
+    
+    justify-content: space-between;
+    
+}
+.card{
+    width: 360px;
+    height:400px;
+    box-shadow: 0 0 4px #d4ecff;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #ffffff;
+    overflow: hidden;
+    
+
+}
+.card:hover{
+    box-shadow: 1px 1px 8px #d4ecff;
+    background-color: #f9fdff;
+    transform: translate(-2px);
+}
+#news-image{
+    width: 100%;
+    height: 240px;
+
+
+}
+.card-content{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+#news-title{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: black;
+
+}
+.news-source{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    color: #4ad0f9;
+}
+.na.active{
+    color: crimson;
+}
