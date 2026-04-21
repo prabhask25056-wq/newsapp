@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="nav">
+        <a href="#" onclick="reload() " class="logo"><img src="Frame 777.png" alt="News App Logo" class="logo"></a>
+        <ul class="nav-links">
+            <li class="na" id="ipl" onclick="onNavItemClick('ipl')">IPL</li>
+            <li class="na" id="finance" onclick="onNavItemClick('finance')">World</li>
+            <li class="na" id="Business" onclick="onNavItemClick('Business')">Business</li>
+            <li class="na" id="Politics" onclick="onNavItemClick('Politics')">Politics</li></ul>
+    <div class="search-container">
+        <input type="text" class="search-input" id="search-text" placeholder="Search news...">
+        <button class="search-button" id="search-button">Search</button>
+        
+
+    </div>
+    </div>
+        
+    <main>
+        <div class="news-container" id="cards-container" >
+            
+        </div>
+            
+    
+       
+        <script src="script.js"></script>
+    
+    </main>
+    <template id="template-news-card">
+        <div class="card">
+                <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="News Image" id="news-image"></div>
+                <div class="card-content">
+                    <h3 id="news-title"> This is the Title</h3>
+                    <h6 class="news-source" id="news-source"> End Gaget 26/08/2023</h6>
+                    <p class="news-desc" id="news-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc varius commodo. Sed at ligula a enim efficitur bibendum.</p>
+                </div>
+            </div>
+    </template>
+
+</body>
+</html>
