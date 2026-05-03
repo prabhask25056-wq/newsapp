@@ -40,7 +40,7 @@ def base_app():
 
 
 
-# Here we read all news
+
 @app.route("/news")
 def read_all_news():
    res = supabase.table("news").select("*").execute()
@@ -51,7 +51,7 @@ def read_all_news():
 
 
 
-# Here we create a new product in our database
+
 @app.route("/news", methods=["POST"])
 def create_news():
   
@@ -88,7 +88,7 @@ def create_news():
 def delete_news(news_id):
 
 
-   # Here we check if product exists (optional but good practice)
+   
    check = supabase.table("news").select("*").eq("id", news_id).execute()
 
 
@@ -96,7 +96,7 @@ def delete_news(news_id):
        return {"error": "news not found"}, 404
 
 
-   # Here we delete the product (only if the given product id was correct)
+   
    res = supabase.table("news").delete().eq("id", news_id).execute()
 
 
@@ -133,7 +133,7 @@ def update_news(news_id):
        return {"error": "Invalid source"}, 400
 
 
-   # Perform update
+   
    res = supabase.table("news").update(data).eq("id", news_id).execute()
 
 
@@ -147,6 +147,7 @@ def update_news(news_id):
 
 
 
-# ---------------- Run the App ---------------- #
+
 if __name__ == "__main__":
-   app.run(port=5001, debug=True)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="0.0.0.0", port=port)
