@@ -51,7 +51,6 @@ def read_all_news():
 
 
 
-
 @app.route("/news", methods=["POST"])
 def create_news():
   
@@ -69,7 +68,7 @@ def create_news():
        return {"error": "description is required"}, 400
 
 
-   new_news = {
+   new_product = {
        "title": data["title"],
        "source": data["price"],
        "description": data["rating"],
@@ -96,7 +95,7 @@ def delete_news(news_id):
        return {"error": "news not found"}, 404
 
 
-   
+   #
    res = supabase.table("news").delete().eq("id", news_id).execute()
 
 
@@ -121,7 +120,7 @@ def update_news(news_id):
        return {"error": "No data provided"}, 400
 
 
-   # Check if product exists
+  
    check = supabase.table("news").select("*").eq("id", news_id).execute()
 
 
@@ -148,6 +147,6 @@ def update_news(news_id):
 
 
 
-if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 5001))
-    app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5001))
+    app.run(host='0.0.0.0', port=port)
