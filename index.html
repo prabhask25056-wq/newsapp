@@ -22,8 +22,8 @@
     </div>
     </div>
         
-    <main>
-        <div class="news-container" id="cards-container" >
+    <main id="root"></main>
+    <div class="news-container" id="cards-container" >
             
         </div>
             
@@ -33,16 +33,17 @@
     
     </main>
     <template id="template-news-card">
-        <div class="card">
-                <div class="card-header">
-                <img src="https://via.placeholder.com/400x200" alt="News Image" id="news-image"></div>
-                <div class="card-content">
-                    <h3 id="news-title"> This is the Title</h3>
-                    <h6 class="news-source" id="news-source"> End Gaget 26/08/2023</h6>
-                    <p class="news-desc" id="news-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien eget nunc varius commodo. Sed at ligula a enim efficitur bibendum.</p>
-                </div>
-            </div>
-    </template>
+  <div class="card">
+    
+    <img class="news-image" id="thumbnail" src="" alt="thumbnail">
 
+    <div class="card-content">
+      <h3 class="news-title" id="news-title"></h3>
+      <p class="news-source" id="news-source"></p>
+      <p class="news-description" id="news-description"></p>
+    </div>
+
+  </div>
+</template>
 </body>
 </html>
