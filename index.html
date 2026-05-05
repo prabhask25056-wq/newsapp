@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News App</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News App</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-   
-    <div class="nav">
-        <a href="#" onclick="reload() " class="logo"><img src="Frame 777.png" alt="News App Logo" class="logo"></a>
-        <ul class="nav-links">
-            <li class="na" id="ipl" onclick="onNavItemClick('ipl')">IPL</li>
-            <li class="na" id="finance" onclick="onNavItemClick('finance')">World</li>
-            <li class="na" id="Business" onclick="onNavItemClick('Business')">Business</li>
-            <li class="na" id="Politics" onclick="onNavItemClick('Politics')">Politics</li></ul>
+
+  <nav class="nav">
+    <a href="#" onclick="reload()" class="logo-link">
+      <img src="Frame 777.png" alt="News App Logo" class="logo" />
+    </a>
+
+    <ul class="nav-links">
+      <li class="na" id="ipl" onclick="onNavItemClick('ipl')">IPL</li>
+      <li class="na" id="world" onclick="onNavItemClick('world')">World</li>
+      <li class="na" id="business" onclick="onNavItemClick('business')">Business</li>
+      <li class="na" id="politics" onclick="onNavItemClick('politics')">Politics</li>
+    </ul>
+
     <div class="search-container">
-        <input type="text" class="search-input" id="search-text" placeholder="Search news...">
-        <button class="search-button" id="search-button">Search</button>
-        
-
+      <input type="text" class="search-input" id="search-text" placeholder="Search news..."/>
+      <button class="search-button" id="search-button">Search</button>
     </div>
-    </div>
-    <main id="root"></main>
-    <div class="news-container" id="cards-container" >
-            
-        </div>
-            
-    
-       
-        <script src="script.js"></script>
-    
-    </main>
-    <template id="template-news-card">
-  <div class="card">
-    
-    <img class="news-image" id="thumbnail" src="" alt="thumbnail">
+  </nav>
 
-    <div class="card-content">
-      <h3 class="news-title" id="news-title"></h3>
-      <p class="news-source" id="news-source"></p>
-      <p class="news-description" id="news-description"></p>
-    </div>
+  <main>
+    <div class="news-container" id="cards-container"></div>
+  </main>
 
-  </div>
-</template>
+  <template id="template-news-card">
+    <div class="card">
+      <img class="news-image" id="thumbnail" src="" alt="News thumbnail" />
+
+      <div class="card-content">
+        <h3 class="news-title" id="news-title"></h3>
+        <p class="news-source" id="news-source"></p>
+        <p class="news-description" id="news-description"></p>
+        <a class="read-more" id="news-url" href="#" target="_blank">
+          Read full article →
+        </a>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+
 </body>
 </html>

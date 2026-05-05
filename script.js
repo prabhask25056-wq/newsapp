@@ -1,6 +1,8 @@
 const url = "http://localhost:5001/news";
 
-window.addEventListener("load", () => fetchNews());
+window.addEventListener("load", () => {
+  fetchNews();
+});
 
 function reload() {
   window.location.reload();
@@ -9,14 +11,18 @@ function reload() {
 async function fetchNews(query = "") {
   try {
     const res = await fetch(url);
-    const data = await res.json();
 
+    if (!res.ok) {
+      throw new Error("Failed to fetch news");
+    }
+
+    const data = await res.json();
     let newsList = data.news || [];
 
     if (query) {
       const searchQuery = query.toLowerCase();
 
-      newsList = newsList.filter(news =>
+      newsList = newsList.filter((news) =>
         news.title?.toLowerCase().includes(searchQuery) ||
         news.source?.toLowerCase().includes(searchQuery) ||
         news.description?.toLowerCase().includes(searchQuery) ||
@@ -27,6 +33,9 @@ async function fetchNews(query = "") {
     bindData(newsList);
   } catch (error) {
     console.error("Error fetching news:", error);
+
+    const cardsContainer = document.getElementById("cards-container");
+    cardsContainer.innerHTML = "<h2>Unable to load news. Check backend server.</h2>";
   }
 }
 
@@ -36,12 +45,12 @@ function bindData(newsList) {
 
   cardsContainer.innerHTML = "";
 
-  if (newsList.length === 0) {
-    cardsContainer.innerHTML = `<h2>No news found</h2>`;
+  if (!newsList || newsList.length === 0) {
+    cardsContainer.innerHTML = "<h2>No news found</h2>";
     return;
   }
 
-  newsList.forEach(news => {
+  newsList.forEach((news) => {
     const cardClone = newsCardTemplate.content.cloneNode(true);
     fillDataInCard(cardClone, news);
     cardsContainer.appendChild(cardClone);
@@ -53,16 +62,31 @@ function fillDataInCard(cardClone, news) {
   const newsTitle = cardClone.querySelector("#news-title");
   const newsSource = cardClone.querySelector("#news-source");
   const newsDesc = cardClone.querySelector("#news-description");
+  const newsUrl = cardClone.querySelector("#news-url");
+  const card = cardClone.querySelector(".card");
 
-  newsImg.src = news.thumbnail || "https://via.placeholder.com/400x200";
-  newsTitle.innerHTML = news.title || "No title";
-  newsSource.innerHTML = news.source || "Unknown source";
-  newsDesc.innerHTML = news.description || "No description available";
+  newsImg.src =
+    news.thumbnail ||
+    "https://development-and-testing-bucket-abcdxyz1234.s3.ap-south-1.amazonaws.com/no-pictures.png";
 
-  cardClone.firstElementChild.addEventListener("click", () => {
-    if (news.url) {
+  newsImg.alt = news.title || "News image";
+
+  newsTitle.textContent = news.title || "No title";
+  newsSource.textContent = `${news.source || "Unknown source"} ${news.category ? "• " + news.category : ""}`;
+  newsDesc.textContent = news.description || "No description available";
+
+  if (news.url) {
+    newsUrl.href = news.url;
+
+    card.addEventListener("click", () => {
       window.open(news.url, "_blank");
-    }
+    });
+  } else {
+    newsUrl.style.display = "none";
+  }
+
+  newsUrl.addEventListener("click", (event) => {
+    event.stopPropagation();
   });
 }
 
@@ -73,9 +97,17 @@ function onNavItemClick(category) {
 
   const navItem = document.getElementById(category);
 
-  curSelectedNav?.classList.remove("active");
+  if (curSelectedNav) {
+    curSelectedNav.classList.remove("active");
+  }
+
   curSelectedNav = navItem;
-  curSelectedNav.classList.add("active");
+
+  if (curSelectedNav) {
+    curSelectedNav.classList.add("active");
+  }
+
+  document.getElementById("search-text").value = "";
 }
 
 const searchButton = document.getElementById("search-button");
@@ -88,7 +120,40 @@ searchButton.addEventListener("click", () => {
 
   fetchNews(query);
 
-  curSelectedNav?.classList.remove("active");
+  if (curSelectedNav) {
+    curSelectedNav.classList.remove("active");
+  }
+
   curSelectedNav = null;
 });
 
+searchText.addEventListener("keypress", (event) => {
+  if (event.key === "Enter") {
+    searchButton.click();
+  }
+});
+
+async function addNews(newsData) {
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(newsData)
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      console.error("Error adding news:", data);
+      return;
+    }
+
+    console.log("News added successfully:", data);
+    fetchNews();
+
+  } catch (error) {
+    console.error("POST request failed:", error);
+  }
+}
